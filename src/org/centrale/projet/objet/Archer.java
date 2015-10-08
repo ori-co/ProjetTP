@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author oriane 
  */
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant{
     /* attributs */
 /**
  * Nombre de flèches de l'archer
@@ -73,6 +73,7 @@ public class Archer extends Personnage {
      * lance un combat à distance entre l'archer et la créature attaquée
      * @param def la créature attaquée
      */
+    @Override
     public void combattre(Creature def) {
         System.out.println("\n Combat à distance :");
         Random rand = new Random();

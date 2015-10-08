@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author oriane école
  */
-public class Guerrier extends Personnage {
+public class Guerrier extends Personnage implements Combattant {
 
     public Guerrier(int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag) {
         super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag);
@@ -38,6 +38,7 @@ public class Guerrier extends Personnage {
      * lance un combat au corps à corps entre le guerrier et la créature attaquée
      * @param def la créature attaquée
      */
+    @Override
     public void combattre (Creature def){
         System.out.println("\n Combat au corps à corps :");
         Random rand = new Random();

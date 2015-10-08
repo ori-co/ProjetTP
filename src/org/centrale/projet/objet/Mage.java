@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author oriane école
  */
-public class Mage extends Personnage {
+public class Mage extends Personnage implements Combattant{
 
     /**
      *
@@ -51,6 +51,7 @@ public class Mage extends Personnage {
      * lance un combat magique entre le mage et la créature attaquée
      * @param def la créature attaquée
      */
+    @Override
     public void combattre(Creature def) {   
         System.out.println("\n Combat magique :");
         Random rand = new Random();
