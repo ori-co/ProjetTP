@@ -39,5 +39,9 @@ public class Paysan extends Personnage{
         super();
     }
     
+    public void affiche(){
+        System.out.println("Je suis un paysan du nom de "+ this.nom + " positionné en " + this.pos);
+    }
+    
     
 }

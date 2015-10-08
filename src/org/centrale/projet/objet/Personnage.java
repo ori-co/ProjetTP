@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  * @author oriane 
  */
-public class Personnage extends Creature{
+public abstract class Personnage extends Creature{
     /* Attributs */
 /**
  * Nom du personnage

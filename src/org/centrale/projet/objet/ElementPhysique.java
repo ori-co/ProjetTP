@@ -10,7 +10,7 @@ package org.centrale.projet.objet;
  * @author Sacha
  * Il s'agit d'un élément qu'on peut placer dans le monde
  */
-public class ElementPhysique {
+public abstract class ElementPhysique {
      /**
      * Position du monstre
      */

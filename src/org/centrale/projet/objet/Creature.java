@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author oriane école
  */
-public class Creature extends ElementPhysique {
+public abstract class Creature extends ElementPhysique implements Deplacable {
      /**
      * nombre de points de vie 
      */
@@ -157,15 +157,39 @@ public class Creature extends ElementPhysique {
     /**
      * déplace le monstre sur une case adjacente aléatoirement choisie
      */
+    @Override
     public void deplace() {
         Random rand = new Random();
         pos.translate(rand.nextInt(3)-1, rand.nextInt(3)-1);
+    }
+    /**
+     * 
+     * @param dir direction dans laquelle le personnage est déplacé : 
+     * h:haut b:bas d:droite ou g:gauche
+     * @param nbCases nombre de cases que le personnage parcourt dans la direction choisie
+     */
+    public void deplace(char dir, int nbCases){
+        switch(dir){
+            case 'h' :
+                pos.translate(0,nbCases);
+            break;
+            case 'b':
+                pos.translate(0, -nbCases);
+                break;
+            case 'd':
+                pos.translate(nbCases, 0);
+                break;
+            case 'g':
+                pos.translate(-nbCases, 0);
+                break;
+            default:
+                //
+                ;   
+        }
     }
 
      /** 
      * affiche la position de la créature
      */
-    public void affiche(){
-        System.out.println("Il y a une créature en : " + pos);
-    } 
+    public abstract void affiche();
 }

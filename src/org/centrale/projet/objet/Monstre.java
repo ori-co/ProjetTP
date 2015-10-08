@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author Sacha
  */
-public class Monstre extends Creature {
+public abstract class Monstre extends Creature {
 
 
     /* Constructeurs */
