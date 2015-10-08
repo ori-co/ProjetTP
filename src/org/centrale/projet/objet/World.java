@@ -18,7 +18,6 @@ import org.centrale.projet.objet.Contraintes.PlaceLibre;
  *
  * @author Oriane et Sacha
  */
-
 public class World {
 
     /**
@@ -46,7 +45,7 @@ public class World {
      * liste des Objets du jeu
      */
     public ArrayList<Objet> lesObjets;
-    
+
     public ArrayList<Joueur> lesJoueurs;
 
     public ArrayList<Joueur> getLesJoueurs() {
@@ -86,7 +85,7 @@ public class World {
                 matriceObjets[ligne][colonne] = null;
             }
         }
-        lesJoueurs = new ArrayList<> ();
+        lesJoueurs = new ArrayList<>();
 
     }
 
@@ -107,7 +106,7 @@ public class World {
                 matriceObjets[ligne][colonne] = null;
             }
         }
-        
+
         lesJoueurs = new ArrayList<>();
     }
 
@@ -230,29 +229,46 @@ public class World {
     }
 
     /**
-     * crée un monde aléatoirement le nombre de protagoniste de chaque type est
-     * aléatoire la position des protagonistes est aléatoire les protagonistes
-     * doivent etre suffisamment proche et non superposés
+     * crée un monde contenant un nombre de protagonistes donné 
+     * et dont les positions et les types sont aléatoirement choisis
      *
      *
      * @param nbPersos nb de protagonistes à créer
-     * @return 
+     * @return
      */
-
     public boolean creeMondeAlea(int nbPersos) {
 
         Random rand = new Random();
         ArrayList<Point2D> placesLibres;
-        for (int i = 0; i < nbPersos; i++) {
 
-            placesLibres = placesLibres();
-            if (placesLibres.isEmpty()) {
-                return false;
+        try {
+            ArrayList<Class> lesTypesDeCreatures = new ArrayList<>();
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Archer"));
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Guerrier"));
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Mage"));
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Paysan"));
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Lapin"));
+            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Loup"));
+
+            for (int i = 0; i < nbPersos; i++) {
+
+                placesLibres = placesLibres();
+                if (placesLibres.isEmpty()) {
+                    return false;
+                }
+
+                int k = rand.nextInt(lesTypesDeCreatures.size());
+                placer((ElementPhysique) lesTypesDeCreatures.get(k).newInstance());
+
             }
-
-            placer(new Archer());
-        }
-        return true;
+           return true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } 
     }
 
     /**
@@ -305,24 +321,24 @@ public class World {
         }
         switch (type) {
             case 1:
-                p = new Archer(100, rand.nextInt(20), rand.nextInt(70), rand.nextInt(30), rand.nextInt(50), new Point2D(), nom, 0, rand.nextInt(10), 0,rand.nextInt(15), rand.nextInt(15),10);
+                p = new Archer(100, rand.nextInt(20), rand.nextInt(70), rand.nextInt(30), rand.nextInt(50), new Point2D(), nom, 0, rand.nextInt(10), 0, rand.nextInt(15), rand.nextInt(15), 10);
                 this.placer(p);
-                this.lesJoueurs.add(new Joueur (p));
+                this.lesJoueurs.add(new Joueur(p));
                 break;
             case 2:
-                p = new Guerrier(100, rand.nextInt(30), rand.nextInt(70), rand.nextInt(40), rand.nextInt(60), new Point2D(), nom, 0, rand.nextInt(10), 0,rand.nextInt(15), rand.nextInt(3));
+                p = new Guerrier(100, rand.nextInt(30), rand.nextInt(70), rand.nextInt(40), rand.nextInt(60), new Point2D(), nom, 0, rand.nextInt(10), 0, rand.nextInt(15), rand.nextInt(3));
                 this.placer(p);
-                this.lesJoueurs.add(new Joueur (p));
+                this.lesJoueurs.add(new Joueur(p));
                 break;
             case 3:
-                p = new Mage(100, rand.nextInt(15), rand.nextInt(10), rand.nextInt(30), rand.nextInt(10), new Point2D(), nom, 10, rand.nextInt(70), 0,rand.nextInt(50), rand.nextInt(15));
+                p = new Mage(100, rand.nextInt(15), rand.nextInt(10), rand.nextInt(30), rand.nextInt(10), new Point2D(), nom, 10, rand.nextInt(70), 0, rand.nextInt(50), rand.nextInt(15));
                 this.placer(p);
-                 this.lesJoueurs.add(new Joueur (p));
+                this.lesJoueurs.add(new Joueur(p));
                 break;
             case 4:
-                p = new Paysan(100, rand.nextInt(40), 0, rand.nextInt(40), 0, new Point2D(), nom, 0, rand.nextInt(10), 0,0, 0);
+                p = new Paysan(100, rand.nextInt(40), 0, rand.nextInt(40), 0, new Point2D(), nom, 0, rand.nextInt(10), 0, 0, 0);
                 this.placer(p);
-                this.lesJoueurs.add(new Joueur (p));
+                this.lesJoueurs.add(new Joueur(p));
                 break;
             default:
         }

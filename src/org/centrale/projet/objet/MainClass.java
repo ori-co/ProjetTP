@@ -13,14 +13,15 @@ public class MainClass {
     public static void main(String[] args)
     {
         World monde = new World(20);
+        monde.placer(new Mage());
+        monde.creeMondeAlea(25);
         
-        for (int i =0; i<5; i++) {
-            monde.creationJoueur();
-            monde.lesJoueurs.get(i).getPerso().affiche();
-        }
         
-        monde.lesJoueurs.get(0).getPerso().affiche();
-        
+//        for (int i =0; i<5; i++) {
+//            monde.creationJoueur();
+//            monde.lesJoueurs.get(i).getPerso().affiche();
+//        }
+//        
         monde.afficheMatrice();
     }
 }
