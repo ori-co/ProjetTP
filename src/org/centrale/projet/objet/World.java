@@ -11,7 +11,7 @@ import org.centrale.projet.objet.Contraintes.Contrainte;
 import org.centrale.projet.objet.Contraintes.PlaceLibre;
 /**
  *
- * @author Oriane et Sacha
+ * @author Oriane et Sacha 
  */
 
 public class World {
@@ -233,7 +233,7 @@ public class World {
     /**
      * Affiche les protagonistes contenus dans le monde (position et nom s'ils en ont)
      */
-    public void affiche(){
+    public void afficheWorld(){
         System.out.println("\nDans WoECN aujourd'hui");
         for (Personnage p : lesPersos) {
             p.affiche();
@@ -259,84 +259,5 @@ public class World {
             System.out.print("\n");
         }
 
-    }
-           
-    /**
-     * Méthode qui retourne true si le protagoniste est positionné correctement
-     * 
-     * @param maxDist distance acceptable entre deux protagonistes
-     * @param c1 protagoniste en question
-     * 
-     * @return positionnement du protagoniste correct ou non
-     */
-    public boolean positionCreatureOK(Creature c1, int maxDist) {
-
-        ArrayList<Creature> lesCreas = new ArrayList<>();        
-        for (Personnage p:lesPersos) { lesCreas.add((Creature) p); } 
-        for (Monstre m:lesMonstres) { lesCreas.add((Creature) m); }        
-        
-        for (Creature c2 : lesCreas) {
-                if (!c1.equals(c2)) {     
-                    float dist = c1.getPos().distance(c2.getPos());
-                    if (dist == 0 || dist > maxDist) {
-                        return false;
-                    }
-                }
-        }
-        return true;
-    }
-    
-    /**
-     * Construit une matrice (symetrique) à partir des n créatures C0, C1...Cn 
-     * telle que C(l,c)(valeur en ligne = l et colonne = c) est la distance entre Cl et Cn 
-     */
-    public void testDistances(){
-        ArrayList<Creature> lesCreas = new ArrayList<>();        
-        for (Personnage p:lesPersos) { lesCreas.add((Creature) p); }
-        for (Monstre m:lesMonstres) { lesCreas.add((Creature) m); }   
-        
-        String txt = "";
-        Boolean test = true;
-        
-        for (Creature c1 : lesCreas){
-                for (Creature c2: lesCreas){
-                    int dist = Math.round(c1.getPos().distance(c2.getPos()));
-                    if (dist >= 10) {
-                        txt += "  " + dist; 
-                    } else {
-                        txt += "  0"+ dist;
-                    }
-
-                    if (!c1.equals(c2) && (dist ==0 || dist > 20)){
-                        test=false;
-                    }
-
-            }
-                txt += "\n";
-        }
-        System.out.println(txt);
-        System.out.println("Résultat du test sur les distances : " + test);
-    }
-
-    public void afficheBoucleIt() {
-        System.out.println("\nAffichage avec boucle itérateur");
-        long debutN = System.nanoTime();
-        for (int i = 0; i < lesPersos.size(); i++) {
-            lesPersos.get(i).affiche();
-        }
-        long finN = System.nanoTime();
-        System.out.println("Temps d'affichage en ns : "+(finN-debutN));
-    }
-
-    public void afficheBoucleTaille() {
-        System.out.println("\nAffichage avec boucle sur la taille");
-        long debutN = System.nanoTime();
-        Iterator it = lesPersos.iterator();
-        while (it.hasNext()) {
-            Personnage element = (Personnage) it.next();
-            element.affiche();
-        }
-        long finN = System.nanoTime();
-        System.out.println("Temps d'affichage en ns : "+(finN-debutN));
     }
 }
