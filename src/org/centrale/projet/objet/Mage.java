@@ -27,8 +27,8 @@ public class Mage extends Personnage implements Combattant{
      * @param pourcentageResistMag pourcentage de résistance à la magie
      * @param degMag dégats magie
      */
-    public Mage(int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag) {
-        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag);
+    public Mage(int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int dist) {
+        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag, dist);
     }
 
     public Mage() {
@@ -60,7 +60,7 @@ public class Mage extends Personnage implements Combattant{
             // le combat peut avoir lieu
 
             // tirage de l'attaquant
-            if (rand.nextInt(100) <= this.pourcentageAtt) {
+            if (rand.nextInt(100) <= this.pourcentageMag) {
                 // attaque réussie
 
                 System.out.println(this.getPtMana());

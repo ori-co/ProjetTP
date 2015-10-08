@@ -50,13 +50,14 @@ public abstract class Personnage extends Creature{
      * @param pourcentageResistMag pourcentage de résistance à la magie
      * @param degMag dégats magie
      */
-    public Personnage( int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos,String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag) {
+    public Personnage( int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos,String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int distMaxAtt) {
         super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos);
         this.nom = new String(nom);
         this.ptMana = ptMana;
         this.pourcentageMag = pourcentageMag;
         this.pourcentageResistMag = pourcentageResistMag;
         this.degMag = degMag;
+        this.distAttMax=distMaxAtt;
     }
 
     public Personnage() {
@@ -66,6 +67,7 @@ public abstract class Personnage extends Creature{
         this.pourcentageMag = 0;
         this.pourcentageResistMag = 0;
         this.degMag = 0;
+        this.distAttMax=0;
     }
 
     public Personnage(Personnage p) {
@@ -75,6 +77,7 @@ public abstract class Personnage extends Creature{
         this.pourcentageMag = p.pourcentageMag;
         this.pourcentageResistMag = p.pourcentageResistMag;
         this.degMag = p.degMag;
+        this.distAttMax=p.distAttMax;
     }
 
     /* methodes */
@@ -129,7 +132,5 @@ public abstract class Personnage extends Creature{
  * Affiche le nom et la position du personnage
  */
     @Override
-    public void affiche() {
-        System.out.println("Je suis un personnage du nom de " + this.nom + " positionné en " + this.pos);
-    }
+    public abstract void affiche() ;
 }

@@ -32,15 +32,17 @@ public class Archer extends Personnage implements Combattant{
      * @param pourcentageMag pourcentage de réussite des attaques magiques
      * @param pourcentageResistMag pourcentage de résistance à la magie
      * @param degMag dégats magie
+     * @param dist distance max d'attaque
      * @param nbFleches nombre de flèches
      */
-    public Archer( int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag,int nbFleches) {
-        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag);
+    public Archer( int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag,int dist,int nbFleches) {
+        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag,dist, degMag);
         this.nbFleches = nbFleches;
     }
 
     public Archer() {
         super();
+        this.nbFleches=0;
     }
 
     public Archer(Archer a) {

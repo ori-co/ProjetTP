@@ -39,7 +39,6 @@ public abstract class Monstre extends Creature {
     /** 
      * affiche la position du monstre
      */
-    public void affiche(){
-        System.out.println("Il y a un monstre en : " + pos);
-    }
+    @Override
+    public abstract void affiche();
 }
