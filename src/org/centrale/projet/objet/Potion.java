@@ -9,7 +9,7 @@ package org.centrale.projet.objet;
  *
  * @author oriane école
  */
-public class Potion extends Objet{
+public abstract class Potion extends Objet{
     /**
      * nombre d'unité de la potion
      */
@@ -29,5 +29,9 @@ public class Potion extends Objet{
         super();
         nbPt=0;
     }
+    
+    @Override
+    public abstract void affiche();
+    
 
 }

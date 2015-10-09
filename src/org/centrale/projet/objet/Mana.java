@@ -19,6 +19,11 @@ public class Mana extends Potion {
         super();
     }
     
+    @Override
+    public void affiche(){
+        System.out.println("Potion de Magie : "+ etiquette+" est situé en "+ pos);
+    }
+    
     public void estBu(Personnage p) {
 
         float dist = this.pos.distance(p.getPos());

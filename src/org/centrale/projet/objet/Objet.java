@@ -9,7 +9,7 @@ package org.centrale.projet.objet;
  *
  * @author oriane 
  */
-public class Objet extends ElementPhysique {
+public abstract class Objet extends ElementPhysique {
     
     /**
      * nom de l'objet
@@ -37,8 +37,6 @@ public class Objet extends ElementPhysique {
         this.etiquette = etiquette;
     }
     
-    public void affiche() {
-        System.out.println("La potion "+ etiquette+" est situé en "+ pos);
-    }
+    public abstract void affiche();
     
 }
