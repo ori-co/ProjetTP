@@ -42,7 +42,17 @@ public class Archer extends Personnage implements Combattant{
 
     public Archer() {
         super();
-        this.nbFleches=0;
+        Random rand = new Random();
+        this.setPtVie(100);
+        this.setPtPar(rand.nextInt(20));
+        this.setPourcentageAtt(rand.nextInt(70));
+        this.setPourcentagePar(rand.nextInt(30));
+        this.setDegAtt(rand.nextInt(50));
+        this.setPourcentageMag(rand.nextInt(10));
+        this.setDegMag(rand.nextInt(15));
+        this.setDistAttMax(rand.nextInt(15));
+        
+        this.nbFleches=10;
     }
 
     public Archer(Archer a) {

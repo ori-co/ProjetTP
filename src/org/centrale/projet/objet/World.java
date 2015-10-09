@@ -314,29 +314,32 @@ public class World {
 
         Personnage p;
         int type = 0;
-        Random rand = new Random();
         while (type < 1 || type > 4) {
             System.out.println("Type de personnage (1:Archer, 2:Guerrier, 3:Mage ou 4:Paysan) : ");
             type = sc.nextInt();
         }
         switch (type) {
             case 1:
-                p = new Archer(100, rand.nextInt(20), rand.nextInt(70), rand.nextInt(30), rand.nextInt(50), new Point2D(), nom, 0, rand.nextInt(10), 0, rand.nextInt(15), rand.nextInt(15), 10);
+                p = new Archer();
+                p.setNom(nom);
                 this.placer(p);
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 2:
-                p = new Guerrier(100, rand.nextInt(30), rand.nextInt(70), rand.nextInt(40), rand.nextInt(60), new Point2D(), nom, 0, rand.nextInt(10), 0, rand.nextInt(15), rand.nextInt(3));
+                p = new Guerrier();
+                p.setNom(nom);
                 this.placer(p);
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 3:
-                p = new Mage(100, rand.nextInt(15), rand.nextInt(10), rand.nextInt(30), rand.nextInt(10), new Point2D(), nom, 10, rand.nextInt(70), 0, rand.nextInt(50), rand.nextInt(15));
+                p = new Mage();
+                p.setNom(nom);
                 this.placer(p);
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 4:
-                p = new Paysan(100, rand.nextInt(40), 0, rand.nextInt(40), 0, new Point2D(), nom, 0, rand.nextInt(10), 0, 0, 0);
+                p = new Paysan();
+                p.setNom(nom);
                 this.placer(p);
                 this.lesJoueurs.add(new Joueur(p));
                 break;

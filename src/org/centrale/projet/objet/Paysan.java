@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.Random;
+
 /**
  *
  * @author oriane 
@@ -37,6 +39,10 @@ public class Paysan extends Personnage{
 
     public Paysan() {
         super();
+        Random rand = new Random();
+        this.setPtVie(100);
+        this.setPtPar(rand.nextInt(10));
+        this.setPourcentagePar(rand.nextInt(40));
     }
     
     public void affiche(){

@@ -17,7 +17,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
      * charge du nuage toxique, degats infligés à une créature
      */
     protected int charge;
-    
+
     public NuageToxique() {
         super();
         charge = 0;
@@ -25,26 +25,26 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
 
     public NuageToxique(int ch, Point2D p, String et) {
         super(p, et);
-        charge=ch;
+        charge = ch;
     }
-    
+
     @Override
     public void affiche() {
-        System.out.println("Il y a un nuage Toxique en "+ pos);
+        System.out.println("Il y a un nuage Toxique en " + pos);
     }
 
     @Override
     public void deplace() {
         Random rand = new Random();
-        pos.translate(rand.nextInt(3)-1, rand.nextInt(3)-1);
+        pos.translate(rand.nextInt(3) - 1, rand.nextInt(3) - 1);
     }
 
     @Override
     public void deplace(char dir, int nbCases) {
-                switch(dir){
-            case 'h' :
-                pos.translate(0,nbCases);
-            break;
+        switch (dir) {
+            case 'h':
+                pos.translate(0, nbCases);
+                break;
             case 'b':
                 pos.translate(0, -nbCases);
                 break;
@@ -55,7 +55,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
                 pos.translate(-nbCases, 0);
                 break;
             default:
-                ;   
+                ;
         }
     }
 
@@ -65,17 +65,21 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         Random rand = new Random();
         float dist = this.pos.distance(c.getPos());
         // si l'aversaire est sur une case adjacente
-        if (dist<2){
+        if (dist < 2) {
             // l'attaque est un succès
-            if (rand.nextInt(100)<= c.pourcentagePar){
+            if (rand.nextInt(100) <= c.pourcentagePar) {
                 // la parade est un succès
-                int deg = this.charge - c.getPtPar();
-                c.setPtVie(c.getPtVie()-deg);
-                System.out.println("L'adversaire est intoxiqué ! Il ne perd que "+ deg +" points de vie en se protegeant avec son mouchoir.");
+                if (c.getPtPar() > this.charge) {
+                    System.out.println("L'adversaire respire le nuage mais ne perd aucun point de vie en se protegeant avec son mouchoir.");
+                } else {
+                    int deg = this.charge - c.getPtPar();
+                    c.setPtVie(c.getPtVie() - deg);
+                    System.out.println("L'adversaire est intoxiqué ! Il ne perd que " + deg + " points de vie en se protegeant avec son mouchoir.");
+                }
             } else {
                 // la parade est un echec
-                c.setPtVie(c.getPtVie()-this.charge);
-                System.out.println("L'adversaire est intoxiqué ! Il perd "+ this.charge +" points de vie.");
+                c.setPtVie(c.getPtVie() - this.charge);
+                System.out.println("L'adversaire est intoxiqué ! Il perd " + this.charge + " points de vie.");
             }
             // disparition du nuage ?? / diminution de sa charge ?
         } else {
@@ -83,5 +87,5 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
             System.out.println("L'adversaire est trop loin pour être intoxiqué.");
         }
     }
-    
+
 }

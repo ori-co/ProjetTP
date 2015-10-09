@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.Random;
+
 /**
  *
  * @author Sacha
@@ -29,6 +31,10 @@ public class Lapin extends Monstre {
     }
     public Lapin() {
         super();
+        Random rand = new Random();
+        this.setPtVie(100);
+        this.setPtPar(rand.nextInt(5));
+        this.setPourcentagePar(rand.nextInt(15));
     }
     
     /**

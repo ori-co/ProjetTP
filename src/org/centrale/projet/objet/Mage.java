@@ -26,6 +26,7 @@ public class Mage extends Personnage implements Combattant{
      * @param pourcentageMag pourcentage de réussite des attaques magiques
      * @param pourcentageResistMag pourcentage de résistance à la magie
      * @param degMag dégats magie
+     * @param dist
      */
     public Mage(int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int dist) {
         super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag, dist);
@@ -33,6 +34,16 @@ public class Mage extends Personnage implements Combattant{
 
     public Mage() {
         super();
+        Random rand = new Random();
+        this.setPtVie(100);
+        this.setPtPar(rand.nextInt(15));
+        this.setPourcentageAtt(rand.nextInt(10));
+        this.setPourcentagePar(rand.nextInt(30));
+        this.setDegAtt(rand.nextInt(10));
+        this.setPtMana(10);
+        this.setPourcentageMag(rand.nextInt(70));
+        this.setDegMag(rand.nextInt(50));
+        this.setDistAttMax(rand.nextInt(15));
     }
 
     public Mage(Mage m) {
