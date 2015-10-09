@@ -25,17 +25,9 @@ public class Soin extends Potion {
         System.out.println("Potion de Santé : "+ etiquette+" est situé en "+ pos);
     }
 
-    public void estBu(Creature c) {
-
-        float dist = this.pos.distance(c.getPos());
-        if (dist == 0) {
-            // la potion peut etre bu
-            c.setPtVie(c.getPtVie()+this.nbPt);
+    @Override
+    public void estUtilise(Personnage p) {
+            p.setPtVie(p.getPtVie()+this.nbPt);
             System.out.println("La potion de Soin est bu par la créature");
-            
-        } else {
-            // la potion et la créature sont trop loin
-            System.out.println("La potion et la creature sont trop loin");
-        }
     }
 }

@@ -6,7 +6,6 @@
 package org.centrale.projet.objet;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;

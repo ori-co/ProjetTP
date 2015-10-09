@@ -24,17 +24,9 @@ public class Mana extends Potion {
         System.out.println("Potion de Magie : "+ etiquette+" est situé en "+ pos);
     }
     
-    public void estBu(Personnage p) {
-
-        float dist = this.pos.distance(p.getPos());
-        if (dist == 0) {
-            // la potion peut etre bu
+    @Override
+    public void estUtilise(Personnage p) {
             p.setPtMana(p.getPtMana()+this.nbPt);
             System.out.println("La potion de Magie est bu par le personnage");
-            
-        } else {
-            // la potion et la créature sont trop loin
-            System.out.println("La potion et le personnage sont trop loin");
-        }
     }
 }
