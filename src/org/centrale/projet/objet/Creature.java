@@ -191,5 +191,6 @@ public abstract class Creature extends ElementPhysique implements Deplacable {
      /** 
      * affiche la position de la créature
      */
+    @Override
     public abstract void affiche();
 }

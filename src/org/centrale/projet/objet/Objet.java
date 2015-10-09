@@ -37,6 +37,7 @@ public abstract class Objet extends ElementPhysique {
         this.etiquette = etiquette;
     }
     
+    @Override
     public abstract void affiche();
     
 }
