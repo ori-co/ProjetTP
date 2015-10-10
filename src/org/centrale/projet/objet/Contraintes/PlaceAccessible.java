@@ -30,16 +30,11 @@ public class PlaceAccessible implements Contrainte {
         int y = p.getY();
 
         if (mat[x][y] != null) {
-            try {
-                if (!Class.forName("org.centrale.projet.objet.Utilisable").isInstance(mat[x][y])) {
-                    return false;
-                } else {
+                if (mat[x][y] instanceof Utilisable) {
                     return true;
+                } else {
+                    return false;
                 }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(PlaceAccessible.class.getName()).log(Level.SEVERE, null, ex);
-                return false;
-            }
         } else {
             return true;
         }
@@ -58,15 +53,9 @@ public class PlaceAccessible implements Contrainte {
         for (int i = 0; i < World.tailleMonde; i++) {
             for (int j = 0; j < World.tailleMonde; j++) {
                 if (mat[i][j] != null) {
-                    try {
-                        if (!Class.forName("org.centrale.projet.objet.Utilisable").isInstance(mat[i][j])) {
-
-                        } else {
-                            pointsLibres.add(new Point2D(i, j));
-                        }
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(PlaceAccessible.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                        if (mat[i][j] instanceof Utilisable) {
+                             pointsLibres.add(new Point2D(i, j));
+                        } 
                 } else {
                     pointsLibres.add(new Point2D(i, j));
                 }

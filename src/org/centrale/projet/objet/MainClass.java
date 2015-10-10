@@ -12,10 +12,10 @@ package org.centrale.projet.objet;
 public class MainClass {
     public static void main(String[] args)
     {
-        World monde = new World();
-        //monde.placer(new Mage());
-        monde.creeMondeAlea(15);
-        monde.afficheWorld();
+//        World monde = new World();
+//        //monde.placer(new Mage());
+//        monde.creeMondeAlea(15);
+//        monde.afficheWorld();
 
 //        // Test création personnage
 //        for (int i =0; i<5; i++) {
@@ -58,6 +58,9 @@ public class MainClass {
 //        }
         
         // Test tour de jeu
+        World monde = new World();
+        monde.creeMondeAlea(15);
+        monde.afficheWorld();
         monde.creationJoueur();
         monde.afficheMatrice();
         for (int i =0;i<50;i++){
