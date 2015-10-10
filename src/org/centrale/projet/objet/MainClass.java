@@ -12,10 +12,11 @@ package org.centrale.projet.objet;
 public class MainClass {
     public static void main(String[] args)
     {
-        World monde = new World(20);
+        World monde = new World();
         //monde.placer(new Mage());
-        //monde.creeMondeAlea(25);
-        
+        monde.creeMondeAlea(15);
+        monde.afficheWorld();
+
         // Test création personnage
 //        for (int i =0; i<5; i++) {
 //            monde.creationJoueur();
@@ -42,18 +43,18 @@ public class MainClass {
 //        robin.utilise(p1);
 //        System.out.println(robin.getPtVie());
         
-        // Test du gosier
-        Archer robin = new Archer();robin.setNom("Robin des Bois");
-        Biscuit petitLu = new Biscuit(15,3,new Point2D(),"Paquet de Petit Lu");
-        monde.placer(robin);
-        monde.placer(petitLu, robin.getPos());
-        System.out.println("Pourcentage Att de Robin : "+robin.getPourcentageAtt());
-        monde.afficheWorld();
-        robin.utilise(petitLu);
-        for (int i=0;i<6;i++){
-        robin.digere();
-        robin.deplace();
-        System.out.println("Pourcentage Att de Robin : "+robin.getPourcentageAtt());
-        }
+//        // Test du gosier
+//        Archer robin = new Archer();robin.setNom("Robin des Bois");
+//        Biscuit petitLu = new Biscuit(15,3,new Point2D(),"Paquet de Petit Lu");
+//        monde.placer(robin);
+//        monde.placer(petitLu, robin.getPos());
+//        System.out.println("Pourcentage Att de Robin : "+robin.getPourcentageAtt());
+//        monde.afficheWorld();
+//        robin.utilise(petitLu);
+//        for (int i=0;i<6;i++){
+//        robin.digere();
+//        robin.deplace();
+//        System.out.println("Pourcentage Att de Robin : "+robin.getPourcentageAtt());
+//        }
     }
 }

@@ -6,7 +6,6 @@
 package org.centrale.projet.objet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -36,7 +35,7 @@ public class World {
 
     public World() {
         lesBots = new ArrayList<>();
-        tailleMonde = 20; //taille par defaut
+        tailleMonde = 50; //taille par defaut
         lesJoueurs = new ArrayList<>();
     }
 
@@ -57,7 +56,7 @@ public class World {
      *
      * @return
      */
-    private ElementPhysique[][] toMatrice() {
+    public ElementPhysique[][] toMatrice() {
         ElementPhysique[][] matriceMonde = new ElementPhysique[tailleMonde][tailleMonde];
         for (ElementPhysique e : lesBots) {
             int x = e.getPos().getX();
@@ -82,16 +81,13 @@ public class World {
      * au point indiqué
      */
     public boolean placer(ElementPhysique element, Point2D point) {
-        ElementPhysique[][] mat = this.toMatrice();
-        
-        int x = point.getX();
-        int y = point.getY();
-        if (mat[x][y] !=null){
-            return false;
-        } else {
+        PlaceLibre pl = new PlaceLibre();
+        if (pl.respecteContrainte(this, element)){
             element.setPos(point);
             return true;
-        }   
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -113,6 +109,18 @@ public class World {
         return placer(element, pointElement);
     }
 
+    /**
+     * Attribue une position libre aléatoirement choisie à l'élément physique 
+     * respectant une contrainte donnée
+     * @param element élément physique à positionner
+     * @param c contrainte à respecter
+     * @return retourne vrai si l'élément a été placé
+     */
+    public boolean placer(ElementPhysique element, Contrainte c){
+        
+        return true;
+    }
+    
     /**
      * Retourner le vecteur des places libres dans le monde 
      *
