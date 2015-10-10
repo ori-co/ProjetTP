@@ -23,5 +23,5 @@ public interface Contrainte {
      * @param element l'element qu'on voudrait inserer (position renseignée !
      * @return True si on peut inserer l'element, False sinon
      */
-    public boolean respecteContrainte(World monde, ElementPhysique element);
+    public boolean respecteContrainte(World monde, Point2D p);
 }

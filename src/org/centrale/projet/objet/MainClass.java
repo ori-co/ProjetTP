@@ -17,13 +17,13 @@ public class MainClass {
         monde.creeMondeAlea(15);
         monde.afficheWorld();
 
-        // Test création personnage
+//        // Test création personnage
 //        for (int i =0; i<5; i++) {
 //            monde.creationJoueur();
 //            monde.lesJoueurs.get(i).getPerso().affiche();
 //        }
         
-        // Test combat toxique
+//        // Test combat toxique
 //        Archer robin = new Archer();robin.setNom("Robin des Bois");
 //        NuageToxique gaz = new NuageToxique(10,new Point2D(),"Gaz Mortel");
 //        monde.placer(robin,new Point2D(5,5));
@@ -56,5 +56,14 @@ public class MainClass {
 //        robin.deplace();
 //        System.out.println("Pourcentage Att de Robin : "+robin.getPourcentageAtt());
 //        }
+        
+        // Test tour de jeu
+        monde.creationJoueur();
+        monde.afficheMatrice();
+        for (int i =0;i<50;i++){
+            monde.tourDeJeu();
+            monde.afficheWorld();          
+        }
+        
     }
 }

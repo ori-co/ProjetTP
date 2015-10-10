@@ -20,10 +20,6 @@ public class Soin extends Potion {
         super();
     }
     
-    @Override
-    public void affiche() {
-        System.out.println("Potion de Santé : "+ etiquette+" est situé en "+ pos);
-    }
 
     @Override
     public void estUtilise(Personnage p) {

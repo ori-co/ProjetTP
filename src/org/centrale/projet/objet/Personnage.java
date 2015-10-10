@@ -154,7 +154,9 @@ public abstract class Personnage extends Creature {
      * Affiche le nom et la position du personnage
      */
     @Override
-    public abstract void affiche();
+    public void affiche() {
+        System.out.println(this.getClass().getSimpleName()+" : "+this.nom + " Position : " + this.pos+" Points de vie : "+this.ptVie);
+    }
 
     /**
      * le personnage courant utilise ou ramasse l'objet utilisable passé en paramètre puis

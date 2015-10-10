@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -71,15 +72,6 @@ public class Archer extends Personnage implements Combattant{
     public void setNbFleches(int nbFleches) {
         this.nbFleches = nbFleches;
     }
-    
-    
-/** 
- * Affiche le nom et la position de l'archer
- */
-    @Override
-    public void affiche() {
-        System.out.println("Je suis un archer du nom de "+ this.nom + " positionné en " + this.pos);
-    }
 
      /**
      * lance un combat à distance entre l'archer et la créature attaquée
@@ -87,7 +79,8 @@ public class Archer extends Personnage implements Combattant{
      */
     @Override
     public void combattre(Creature def) {
-        System.out.println("\n Combat à distance :");
+        System.out.println("\n Combat à distance : \n Adversaire :");
+        def.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(def.pos);
         if (dist >= 2 && dist < this.distAttMax) {
@@ -112,5 +105,18 @@ public class Archer extends Personnage implements Combattant{
             System.out.println("L'adversaire est trop loin ou trop proche pour être attaqué !");
         }
     }
-    
+        @Override
+    public ArrayList<Creature> listeAdversaire(World monde) {
+        ArrayList<Creature> liste = new ArrayList<>();
+        
+        for (ElementPhysique element : monde.lesBots){
+            if (element instanceof Creature){
+                float dist = element.getPos().distance(this.getPos());
+                if (dist >= 2 && dist < this.distAttMax){
+                    liste.add((Creature) element);
+                }
+            }
+        }
+        return liste;
+    }
 }

@@ -36,12 +36,4 @@ public class Lapin extends Monstre {
         this.setPtPar(rand.nextInt(5));
         this.setPourcentagePar(rand.nextInt(15));
     }
-    
-    /**
-     * Affiche le nom et la position de l'archer
-     */
-    @Override
-    public void affiche() {
-        System.out.println("Il y a un lapin en " + this.pos);
-    }
 }

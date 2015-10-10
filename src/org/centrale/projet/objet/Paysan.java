@@ -45,9 +45,5 @@ public class Paysan extends Personnage{
         this.setPourcentagePar(rand.nextInt(40));
     }
     
-    public void affiche(){
-        System.out.println("Je suis un paysan du nom de "+ this.nom + " positionné en " + this.pos);
-    }
-    
     
 }

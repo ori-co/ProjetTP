@@ -31,7 +31,9 @@ public abstract class Potion extends Objet implements Utilisable {
     }
     
     @Override
-    public abstract void affiche();
+    public void affiche(){
+        System.out.println(this.getClass().getSimpleName()+" : "+this.etiquette +" Position : " + this.pos);
+    }
     
     @Override
     public abstract void estUtilise(Personnage p);

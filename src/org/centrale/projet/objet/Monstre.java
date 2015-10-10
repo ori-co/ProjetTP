@@ -5,8 +5,6 @@
  */
 package org.centrale.projet.objet;
 
-import java.util.Random;
-
 /**
  *
  * @author Sacha
@@ -40,5 +38,7 @@ public abstract class Monstre extends Creature {
      * affiche la position du monstre
      */
     @Override
-    public abstract void affiche();
+    public void affiche(){
+        System.out.println(this.getClass().getSimpleName()+" : Position : " + this.pos+" Points de vie : "+this.ptVie);
+    }
 }

@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author oriane école
@@ -15,5 +17,11 @@ public interface Combattant {
      * @param c adversaire du combat
      */
     public void combattre(Creature c);
+    /**
+     * retourne la liste des adversaires potentiels du combattant
+     * @param monde
+     * @return 
+     */
+    public ArrayList<Creature> listeAdversaire(World monde);
     
 }

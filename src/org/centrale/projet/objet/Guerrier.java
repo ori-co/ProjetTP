@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -39,10 +40,7 @@ public class Guerrier extends Personnage implements Combattant {
     /**
      * Affiche le nom et la position de l'archer
      */
-    @Override
-    public void affiche() {
-        System.out.println("Je suis un guerrier du nom de " + this.nom + " positionné en " + this.pos);
-    }
+
 
     /**
      * lance un combat au corps à corps entre le guerrier et la créature
@@ -52,7 +50,8 @@ public class Guerrier extends Personnage implements Combattant {
      */
     @Override
     public void combattre(Creature def) {
-        System.out.println("\n Combat au corps à corps :");
+        System.out.println("\n Combat au corps à corps : \n Adversaire :");
+        def.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(def.pos);
         if (dist < 2) {
@@ -86,5 +85,20 @@ public class Guerrier extends Personnage implements Combattant {
             // le combat échoue
             System.out.println("L'adversaire est trop loin pour être attaqué !");
         }
+    }
+
+    @Override
+    public ArrayList<Creature> listeAdversaire(World monde) {
+        ArrayList<Creature> liste = new ArrayList<>();
+        
+        for (ElementPhysique element : monde.lesBots){
+            if (element instanceof Creature){
+                float dist = element.getPos().distance(this.getPos());
+                if (dist <2){
+                    liste.add((Creature) element);
+                }
+            }
+        }
+        return liste;
     }
 }

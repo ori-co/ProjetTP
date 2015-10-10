@@ -21,11 +21,6 @@ public class Champignon extends Nourriture {
 
     
     @Override
-    public void affiche() {
-        System.out.println("Champignon : "+ etiquette+" est situé en "+ pos);
-    }
-    
-    @Override
     public void estUtilise(Personnage p){
         p.gosier.add(this);
         p.setDegAtt(p.getDegAtt()-nbPt);

@@ -158,34 +158,46 @@ public abstract class Creature extends ElementPhysique implements Deplacable {
      * déplace le monstre sur une case adjacente aléatoirement choisie
      */
     @Override
-    public void deplace() {
+    public Point2D deplace() {
         Random rand = new Random();
-        pos.translate(rand.nextInt(3)-1, rand.nextInt(3)-1);
+        int dx = 0;
+        int dy = 0;
+        while (dx==0 && dy==0){
+            dx =rand.nextInt(3)-1;
+            dy =rand.nextInt(3)-1; 
+        }
+        Point2D p = new Point2D(pos);
+        p.translate(dx,dy);
+        return p;
     }
     /**
+     * retourne la position d'un joueur après déplacement de nbCases dans la direction dir
      * 
      * @param dir direction dans laquelle le personnage est déplacé : 
      * h:haut b:bas d:droite ou g:gauche
      * @param nbCases nombre de cases que le personnage parcourt dans la direction choisie
      */
-    public void deplace(char dir, int nbCases){
+    @Override
+    public Point2D deplace(char dir, int nbCases){
+        Point2D p = new Point2D(pos);
         switch(dir){
             case 'h' :
-                pos.translate(0,nbCases);
+                p.translate(0,nbCases);
             break;
             case 'b':
-                pos.translate(0, -nbCases);
+                p.translate(0, -nbCases);
                 break;
             case 'd':
-                pos.translate(nbCases, 0);
+                p.translate(nbCases, 0);
                 break;
             case 'g':
-                pos.translate(-nbCases, 0);
+                p.translate(-nbCases, 0);
                 break;
             default:
                 //
-                ;   
+                break;   
         }
+        return p;
     }
 
      /** 

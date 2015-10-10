@@ -18,11 +18,6 @@ public class Biscuit extends Nourriture {
     public Biscuit(int nbPt, int nbTours, Point2D p, String et) {
         super(nbPt, nbTours, p, et);
     }
-
-    @Override
-    public void affiche() {
-        System.out.println("Biscuit : "+ etiquette+" est situé en "+ pos);
-    }
     
     @Override
     public void estUtilise(Personnage p){

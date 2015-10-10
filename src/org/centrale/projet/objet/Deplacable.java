@@ -12,14 +12,16 @@ package org.centrale.projet.objet;
 public interface Deplacable {
     /**
      * déplace une creature d'une case dans n'importe quelle direction (choisie aléatoirement)
+     * @return nouvelle position
      */
-    public void deplace();
+    public Point2D deplace();
     
     /**
      * déplace une creature d'un nombre de cases données dans la direction choisie
      * h:haut, b:bas, d:droite, g:gauche
      * @param dir direction du déplacement
      * @param nbCases nb de cases du déplacement
+     * @return nouvelle position
      */
-    public void deplace(char dir, int nbCases);
+    public Point2D deplace(char dir, int nbCases);
 }

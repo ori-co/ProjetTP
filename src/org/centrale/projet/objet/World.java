@@ -12,7 +12,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.centrale.projet.objet.Contraintes.Contrainte;
-import org.centrale.projet.objet.Contraintes.PlaceLibre;
+import org.centrale.projet.objet.Contraintes.PlaceVide;
+import org.centrale.projet.objet.Contraintes.PlaceAccessible;
 
 /**
  *
@@ -35,23 +36,11 @@ public class World {
 
     public World() {
         lesBots = new ArrayList<>();
-        tailleMonde = 50; //taille par defaut
+        tailleMonde = 20; //taille par defaut
         lesJoueurs = new ArrayList<>();
     }
 
-    public int getTailleMondee() {
-        return tailleMonde;
-    }
-
-    public List<ElementPhysique> getLesBots() {
-        return lesBots;
-    }
-
-    public ArrayList<Joueur> getLesJoueurs() {
-        return lesJoueurs;
-    }
-
-        /**
+    /**
      * place les éléments physique dans une matrice à leur position
      *
      * @return
@@ -70,19 +59,18 @@ public class World {
         }
         return matriceMonde;
     }
-    
+
     /**
-     * Retourne vrai si la position est libre et l'attribue à l'élément physique
+     * Retourne vrai si la position est dispo et l'attribue à l'élément physique
      * Retourne faux sinon
      *
      * @param element
      * @param point
-     * @return True si le placement est reussi
-     * au point indiqué
+     * @param pl contrainte de placement de l'élement physique
+     * @return True si le placement est reussi au point indiqué
      */
-    public boolean placer(ElementPhysique element, Point2D point) {
-        PlaceLibre pl = new PlaceLibre();
-        if (pl.respecteContrainte(this, element)){
+    public boolean placer(ElementPhysique element, Point2D point, PlaceAccessible pl) {
+        if (pl.respecteContrainte(this, point)) {
             element.setPos(point);
             return true;
         } else {
@@ -91,54 +79,40 @@ public class World {
     }
 
     /**
-     * Attribue une position libre aléatoirement choisie à l'élément physique
+     * Attribue une position dispo aléatoirement choisie à l'élément physique
      *
      * @param element l'element à placer
      * @return True si le placement est reussi, False si il n'y a pas de place
      */
-    public boolean placer(ElementPhysique element) {
-        ArrayList<Point2D> placesLibres = placesLibres();
-        if (placesLibres.isEmpty()) {
+    public boolean placer(ElementPhysique element, PlaceAccessible pl) {
+        ArrayList<Point2D> places = pl.listeDePlaces(this);
+        if (places.isEmpty()) {
             return false;
         }
-
         Random rnd = new Random();
-
         // On crée le point ou on va inserer l'element
-        Point2D pointElement = placesLibres.get(rnd.nextInt(placesLibres.size())); // On choisit un point au hasard dans placesLibres
-        return placer(element, pointElement);
+        Point2D pointElement = places.get(rnd.nextInt(places.size())); // On choisit un point au hasard dans placesLibres
+        return placer(element, pointElement, pl);
     }
 
     /**
-     * Attribue une position libre aléatoirement choisie à l'élément physique 
-     * respectant une contrainte donnée
-     * @param element élément physique à positionner
-     * @param c contrainte à respecter
-     * @return retourne vrai si l'élément a été placé
+     * Attribue une position à l'élement physique en fonction de la contrainte c
+     *
+     * @param element
+     * @param c
+     * @return
      */
-    public boolean placer(ElementPhysique element, Contrainte c){
-        
+    public boolean placer(ElementPhysique element, Contrainte c) {
+
         return true;
     }
-    
-    /**
-     * Retourner le vecteur des places libres dans le monde 
-     *
-     * @return un vecteur des places libres dans le monde
-     */
-    public ArrayList<Point2D> placesLibres() {
-        ArrayList<Point2D> pointsLibres = new ArrayList<>();
-        ElementPhysique[][] mat = this.toMatrice();
-        for (int i = 0; i < tailleMonde; i++) {
-            for (int j = 0; j < tailleMonde; j++) {
-                if (mat[i][j] != null) {
 
-                } else {
-                    pointsLibres.add(new Point2D(i, j));
-                }
-            }
-        }
-        return pointsLibres;
+    public ElementPhysique getElementByPos(Point2D p) {
+        ElementPhysique[][] mat = this.toMatrice();
+        int x = p.getX();
+        int y = p.getY();
+
+        return mat[x][y];
     }
 
     /**
@@ -146,33 +120,47 @@ public class World {
      * positions et les types sont aléatoirement choisis
      *
      *
-     * @param nbPersos nb de Bots à créer
-     * @return vrai si le monde est créé, faux si le nombre de bots est trop élevé
+     * @param nbBots nb de Bots à créer
+     * @return vrai si le monde est créé, faux si le nombre de bots est trop
+     * élevé
      */
-    public boolean creeMondeAlea(int nbPersos) {
+    public boolean creeMondeAlea(int nbBots) {
 
         Random rand = new Random();
         ArrayList<Point2D> placesLibres;
+        PlaceVide pl = new PlaceVide();
 
         try {
-            ArrayList<Class> lesTypesDeCreatures = new ArrayList<>();
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Archer"));
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Guerrier"));
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Mage"));
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Paysan"));
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Lapin"));
-            lesTypesDeCreatures.add(Class.forName("org.centrale.projet.objet.Loup"));
+            ArrayList<Class> lesTypesDElements = new ArrayList<>();
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Archer"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Guerrier"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Mage"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Paysan"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Lapin"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Loup"));
 
-            for (int i = 0; i < nbPersos; i++) {
+            // Pondérations : chance d'avoir une Crature plus élevée que d'avoir un objet
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Archer"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Guerrier"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Mage"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Paysan"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Lapin"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Loup"));
 
-                placesLibres = placesLibres();
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Soin"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Mana"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Biscuit"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Champignon"));
+
+            for (int i = 0; i < nbBots; i++) {
+                placesLibres = pl.listeDePlaces(this);
                 if (placesLibres.isEmpty()) {
                     return false;
                 }
 
-                int k = rand.nextInt(lesTypesDeCreatures.size());
-                ElementPhysique element = (ElementPhysique) lesTypesDeCreatures.get(k).newInstance();
-                placer(element);
+                int k = rand.nextInt(lesTypesDElements.size());
+                ElementPhysique element = (ElementPhysique) lesTypesDElements.get(k).newInstance();
+                placer(element, new PlaceVide());
                 lesBots.add(element);
 
             }
@@ -186,10 +174,9 @@ public class World {
         return true;
     }
 
-
     /**
-     * crée un nouveau joueur en demandant à l'utilisateur 
-     * d'entrer le nom et le type de personnage souhaité
+     * crée un nouveau joueur en demandant à l'utilisateur d'entrer le nom et le
+     * type de personnage souhaité
      */
     public void creationJoueur() {
         System.out.println("Creation d'un joueur");
@@ -209,25 +196,25 @@ public class World {
             case 1:
                 p = new Archer();
                 p.setNom(nom);
-                this.placer(p);
+                this.placer(p, new PlaceVide());
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 2:
                 p = new Guerrier();
                 p.setNom(nom);
-                this.placer(p);
+                this.placer(p, new PlaceVide());
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 3:
                 p = new Mage();
                 p.setNom(nom);
-                this.placer(p);
+                this.placer(p, new PlaceVide());
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             case 4:
                 p = new Paysan();
                 p.setNom(nom);
-                this.placer(p);
+                this.placer(p, new PlaceVide());
                 this.lesJoueurs.add(new Joueur(p));
                 break;
             default:
@@ -249,23 +236,65 @@ public class World {
     }
 
     /**
-     * affiche graphiquement les types d'éléments physique à leur position dans une matrice
+     * affiche graphiquement les types d'éléments physique à leur position dans
+     * une matrice
      */
     public void afficheMatrice() {
         ElementPhysique[][] mat = this.toMatrice();
-        
+
         String txt = "";
-        for (int i = 0; i < tailleMonde; i++) {
-            for (int j = 0; j < tailleMonde; j++) {
+        for (int j = tailleMonde - 1; j >= 0; j--) {
+            for (int i = 0; i < tailleMonde; i++) {
                 if (mat[i][j] != null) {
                     txt += mat[i][j].getClass().getSimpleName();
                 } else {
-                   txt += "  ";
+                    txt += "  ";
                 }
-                txt +="-";
+                txt += "-";
             }
-            txt+="\n";
+            txt += "\n";
         }
         System.out.println(txt);
+    }
+
+    public void tourDeJeu() {
+//boucle sur les tours de jeu
+//tourDeJeu()
+        System.out.println("Nouveau Tour");
+//	boucle sur les joueurs
+        for (Joueur j : lesJoueurs) {
+            System.out.println("\nA vous de jouer :");
+            j.joue(this);
+        }
+
+//      boucle sur les bots
+        for (ElementPhysique element : lesBots) {
+            System.out.println("\nAu tour d'un "+element.getClass().getSimpleName()+" de jouer :");
+
+            if (element instanceof Combattant) {
+                // si l'élement est un Combattant, on lance un combat
+                // Choix de l'adversaire
+                Random rand = new Random();
+                ArrayList<Creature> liste = ((Combattant) element).listeAdversaire(this);
+                if (!liste.isEmpty()) {
+                    System.out.print("Combat contre un adversaire aléatoirement choisi : ");
+                    ((Combattant) element).combattre(liste.get(rand.nextInt(liste.size())));
+                }
+            } else {
+                if (element instanceof Deplacable) {
+                    // si l'élement est Deplacable, on le déplace, sur une case adjacente aléatoirement choisie
+                    System.out.println("Déplacement aléatoire :");
+                    this.placer(element, ((Deplacable) element).deplace(), new PlaceAccessible());
+                } else {
+                    // on ne fait rien
+                }
+            }
+
+            if (element instanceof Personnage) {
+                // si c'est une personnage, on digere
+                ((Personnage) element).digere();
+            }
+        }
+//fin tourDeJeu()
     }
 }

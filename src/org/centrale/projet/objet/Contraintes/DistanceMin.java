@@ -12,7 +12,7 @@ import org.centrale.projet.objet.*;
  * la creature(ou objet) envoyée en parametre et les autres Creatures(ou objets) presents dans le monde qu'on enverra en parametre
  * @author Sacha
  */
-public class DistanceMin extends PlaceLibre implements Contrainte {
+public class DistanceMin extends PlaceAccessible implements Contrainte {
     
     private int distanceMin;
 
@@ -38,7 +38,7 @@ public class DistanceMin extends PlaceLibre implements Contrainte {
     }
     
     @Override
-    public boolean respecteContrainte(World monde, ElementPhysique element){
+    public boolean respecteContrainte(World monde, Point2D p){
         return true;
     }
 }

@@ -5,6 +5,7 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -39,18 +40,11 @@ public class Loup extends Monstre implements Combattant {
         this.setPourcentagePar(rand.nextInt(30));
         this.setDegAtt(rand.nextInt(50));
     }
-
-    /**
-     * Affiche le nom et la position de l'archer
-     */
-    @Override
-    public void affiche() {
-        System.out.println("Il y a un loup en " + this.pos);
-    }
     
     @Override
     public void combattre(Creature c){
-        System.out.println("\n Combat au corps à corps :");
+        System.out.print("\n Combat au corps à corps : \n Adversaire :");
+        c.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(c.pos);
         if (dist < 2) {
@@ -80,6 +74,21 @@ public class Loup extends Monstre implements Combattant {
             // le combat échoue
             System.out.println("L'adversaire est trop loin pour être attaqué !");
         }
+    }
+    
+    @Override
+    public ArrayList<Creature> listeAdversaire(World monde) {
+        ArrayList<Creature> liste = new ArrayList<>();
+        
+        for (ElementPhysique element : monde.lesBots){
+            if (element instanceof Creature){
+                float dist = element.getPos().distance(this.getPos());
+                if (dist <2){
+                    liste.add((Creature) element);
+                }
+            }
+        }
+        return liste;
     }
 
 }

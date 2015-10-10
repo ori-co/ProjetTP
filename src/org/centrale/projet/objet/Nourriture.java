@@ -49,7 +49,9 @@ public abstract class Nourriture extends Objet implements Utilisable {
     }
      
     @Override
-    public abstract void affiche();
+    public void affiche(){
+        System.out.println(this.getClass().getSimpleName()+" : Position : " + pos);
+    }
     
     @Override
     public abstract void estUtilise(Personnage p);
