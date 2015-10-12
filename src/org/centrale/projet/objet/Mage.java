@@ -58,7 +58,7 @@ public class Mage extends Personnage implements Combattant{
      */
     @Override
     public void combattre(Creature def) {   
-        System.out.println("\n Combat magique :\n Adversaire :");
+        System.out.print("\n Combat magique :\n Adversaire :");
         def.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(def.pos);

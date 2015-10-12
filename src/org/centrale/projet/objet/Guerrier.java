@@ -50,7 +50,7 @@ public class Guerrier extends Personnage implements Combattant {
      */
     @Override
     public void combattre(Creature def) {
-        System.out.println("\n Combat au corps à corps : \n Adversaire :");
+        System.out.print("\n Combat au corps à corps : \n Adversaire :");
         def.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(def.pos);

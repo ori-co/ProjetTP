@@ -82,7 +82,7 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
 
     @Override
     public void combattre(Creature c) {
-        System.out.println("\n Combat toxique  :\n Adversaire :");
+        System.out.print("\n Combat toxique  :\n Adversaire :");
         c.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(c.getPos());

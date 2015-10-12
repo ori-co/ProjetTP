@@ -79,7 +79,7 @@ public class Archer extends Personnage implements Combattant{
      */
     @Override
     public void combattre(Creature def) {
-        System.out.println("\n Combat à distance : \n Adversaire :");
+        System.out.print("\n Combat à distance : \n Adversaire :");
         def.affiche();
         Random rand = new Random();
         float dist = this.pos.distance(def.pos);
