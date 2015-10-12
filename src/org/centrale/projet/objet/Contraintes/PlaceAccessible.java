@@ -6,8 +6,6 @@
 package org.centrale.projet.objet.Contraintes;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.centrale.projet.objet.*;
 
 /**
@@ -29,14 +27,14 @@ public class PlaceAccessible implements Contrainte {
         int x = p.getX();
         int y = p.getY();
 
-        if (mat[x][y] != null) {
-                if (mat[x][y] instanceof Utilisable) {
-                    return true;
-                } else {
-                    return false;
-                }
+        if (x >= 0 && x < World.tailleMonde && y >= 0 && y < World.tailleMonde) {
+            if (mat[x][y] != null) {
+                return mat[x][y] instanceof Utilisable;
+            } else {
+                return true;
+            }
         } else {
-            return true;
+            return false;
         }
     }
 

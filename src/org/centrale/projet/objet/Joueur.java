@@ -112,7 +112,10 @@ public class Joueur {
 
         // Point de destination et éventuel objet sur place stocké
         Point2D nouvP = perso.deplace(d, 1);
-        ElementPhysique element = monde.getElementByPos(nouvP);
+        ElementPhysique element = null;
+        if (nouvP.getX() >= 0 && nouvP.getX() < World.tailleMonde && nouvP.getY() >= 0 && nouvP.getY() < World.tailleMonde) {
+            element = monde.getElementByPos(nouvP);
+        }
 
         // déplacement effectué avec la contrainte Place accessible (cad que la destination peut contenir un objet utilisable)
         boolean deplacement = monde.placer(perso, nouvP, new PlaceAccessible());

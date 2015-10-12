@@ -62,10 +62,10 @@ public class MainClass {
         monde.creeMondeAlea(15);
         monde.afficheWorld();
         monde.creationJoueur();
-        monde.afficheMatrice();
         for (int i =0;i<50;i++){
+            monde.afficheMatrice();
             monde.tourDeJeu();
-            monde.afficheWorld();          
+                      
         }
         
     }

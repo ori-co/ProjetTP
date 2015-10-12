@@ -25,14 +25,14 @@ public class PlaceVide extends PlaceAccessible implements Contrainte {
      * @return Retourn true si la place est libre, false sinon
      */
     private boolean estVide(World monde, Point2D p) {
-        ElementPhysique [][] mat = monde.toMatrice();
+        ElementPhysique[][] mat = monde.toMatrice();
         int x = p.getX();
         int y = p.getY();
-        
-        if (mat[x][y] != null){
-            return false;
+
+        if (x >= 0 && x < World.tailleMonde && y >= 0 && y < World.tailleMonde) {
+            return mat[x][y] == null;
         } else {
-            return true;
+            return false;
         }
     }
     
