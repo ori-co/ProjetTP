@@ -6,7 +6,9 @@
 package org.centrale.projet.objet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -180,45 +182,36 @@ public class World {
      */
     public void creationJoueur() {
         System.out.println("Creation d'un joueur");
+        
         Scanner sc;
-
         System.out.println("Nom du personnage : ");
         sc = new Scanner(System.in);
         String nom = sc.nextLine();
 
-        Personnage p;
-        int type = 0;
-        while (type < 1 || type > 4) {
-            System.out.println("Type de personnage (1:Archer, 2:Guerrier, 3:Mage ou 4:Paysan) : ");
-            type = sc.nextInt();
+        Personnage p = null ;
+        Joueur j = new Joueur(p);
+        ArrayList<Class> listeChoix = new ArrayList<>();
+        try {
+            listeChoix.add(Class.forName("org.centrale.projet.objet.Archer"));
+            listeChoix.add(Class.forName("org.centrale.projet.objet.Guerrier"));
+            listeChoix.add(Class.forName("org.centrale.projet.objet.Mage"));
+            listeChoix.add(Class.forName("org.centrale.projet.objet.Paysan"));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
         }
-        switch (type) {
-            case 1:
-                p = new Archer();
-                p.setNom(nom);
-                this.placer(p, new PlaceVide());
-                this.lesJoueurs.add(new Joueur(p));
-                break;
-            case 2:
-                p = new Guerrier();
-                p.setNom(nom);
-                this.placer(p, new PlaceVide());
-                this.lesJoueurs.add(new Joueur(p));
-                break;
-            case 3:
-                p = new Mage();
-                p.setNom(nom);
-                this.placer(p, new PlaceVide());
-                this.lesJoueurs.add(new Joueur(p));
-                break;
-            case 4:
-                p = new Paysan();
-                p.setNom(nom);
-                this.placer(p, new PlaceVide());
-                this.lesJoueurs.add(new Joueur(p));
-                break;
-            default:
+
+        Class choix = (Class) j.choisi((ArrayList<Object>)(Object)listeChoix);
+        try {
+            p = (Personnage) choix.newInstance();
+            p.setNom(nom);
+        } catch (InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.placer(p, new PlaceVide());
+        j = new Joueur(p);
+        this.lesJoueurs.add(j);
+                
     }
 
     /**
@@ -269,7 +262,7 @@ public class World {
 
 //      boucle sur les bots
         for (ElementPhysique element : lesBots) {
-            System.out.println("\nAu tour d'un "+element.getClass().getSimpleName()+" de jouer :");
+            System.out.println("\nAu tour d'un " + element.getClass().getSimpleName() + " de jouer :");
 
             if (element instanceof Combattant) {
                 // si l'élement est un Combattant, on lance un combat
@@ -296,5 +289,35 @@ public class World {
             }
         }
 //fin tourDeJeu()
+    }
+
+    public void lectureListePersonnages() {
+        Scanner sc = new Scanner(System.in);
+        String chaineUtilisateur = sc.nextLine();
+        String[] listeIntermediaire = chaineUtilisateur.split(",");
+
+        Map<String, Integer> listePersos = new HashMap<>();
+
+        int nbErreur = 0;
+        int nbSucces = 0;
+        for (String classe : listeIntermediaire) {
+            String[] decomposition = classe.split(":");
+
+            if (decomposition.length != 2) {
+                nbErreur++;
+                System.out.println(" ** Erreur d'importation de " + classe);
+            } else {
+                try {
+                    listePersos.put(decomposition[0], Integer.parseInt(decomposition[1]));
+                    nbSucces += Integer.parseInt(decomposition[1]);
+                } catch (NumberFormatException e) {
+                    System.out.println(" ** Erreur d'importation de " + classe + " : " + e.getMessage());
+                }
+            }
+        }
+        System.out.println(nbSucces + " personnages ont été importés avec succés");
+        for (Map.Entry<String, Integer> entry : listePersos.entrySet()) {
+            System.out.println("[" + entry.getKey() + "] -> " + entry.getValue());
+        }
     }
 }
