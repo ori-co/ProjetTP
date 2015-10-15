@@ -127,7 +127,7 @@ public abstract class Creature extends ElementPhysique implements Deplacable {
     }
     
 /* Constructeurs */
-        public Creature(int ptVie,int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
+        public Creature(Point2D pos, int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt) {
         this.ptVie = ptVie;
         this.ptPar = ptPar;
         this.pourcentageAtt = pourcentageAtt;

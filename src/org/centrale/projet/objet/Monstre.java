@@ -22,8 +22,8 @@ public abstract class Monstre extends Creature {
      * @param dA dégats attaque
      * @param pos position 
      */
-    public Monstre(int pV, int ptP, int pA, int pP, int dA, Point2D pos) {
-        super(pV,ptP,pA,pP,dA,pos);
+    public Monstre(Point2D pos, int pV, int ptP, int pA, int pP, int dA) {
+        super(pos, pV,ptP,pA,pP,dA);
     }
     public Monstre(Monstre monstre) {
         super(monstre);

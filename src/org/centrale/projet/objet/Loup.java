@@ -23,8 +23,8 @@ public class Loup extends Monstre implements Combattant {
      * @param dA dégats attaque
      * @param pos position
      */
-    public Loup(int pV,int ptP, int pA, int pP, int dA, Point2D pos) {
-        super(pV, ptP,pA, pP, dA, pos);
+    public Loup(Point2D pos, int pV, int ptP, int pA, int pP, int dA) {
+        super(pos, pV, ptP,pA, pP, dA);
     }
 
     public Loup(Loup l) {

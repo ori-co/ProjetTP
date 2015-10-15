@@ -21,8 +21,8 @@ public class Biscuit extends Nourriture {
         this.etiquette="Petit Lu "+nbPt;
     }
 
-    public Biscuit(int nbPt, int nbTours, Point2D p, String et) {
-        super(nbPt, nbTours, p, et);
+    public Biscuit(Point2D p, String et, int nbPt, int nbTours) {
+        super(p, et, nbPt, nbTours);
     }
     
     @Override

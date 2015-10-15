@@ -214,7 +214,7 @@ public class World {
         this.lesJoueurs.add(j);
 
     }
-
+    
     /**
      * Affiche les protagonistes contenus dans le monde (position et nom s'ils
      * en ont)
@@ -325,7 +325,7 @@ public class World {
             }
         }
     }
-
+    
     public void lectureListePersonnages() {
         Scanner sc = new Scanner(System.in);
         String chaineUtilisateur = sc.nextLine();

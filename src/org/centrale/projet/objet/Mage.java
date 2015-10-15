@@ -29,8 +29,8 @@ public class Mage extends Personnage implements Combattant{
      * @param degMag dégats magie
      * @param dist
      */
-    public Mage(int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int dist) {
-        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag, dist);
+    public Mage(Point2D pos, int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int dist) {
+        super(pos, ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, nom, ptMana, pourcentageMag, pourcentageResistMag, degMag, dist);
     }
 
     public Mage() {

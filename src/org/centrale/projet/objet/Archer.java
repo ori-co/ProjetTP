@@ -36,8 +36,8 @@ public class Archer extends Personnage implements Combattant{
      * @param dist distance max d'attaque
      * @param nbFleches nombre de flèches
      */
-    public Archer( int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag,int dist,int nbFleches) {
-        super(ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, pos, nom, ptMana, pourcentageMag, pourcentageResistMag,dist, degMag);
+    public Archer( Point2D pos, int ptVie, int ptPar, int pourcentageAtt, int pourcentagePar, int degAtt, String nom, int ptMana, int pourcentageMag, int pourcentageResistMag, int degMag, int dist, int nbFleches) {
+        super(pos, ptVie, ptPar, pourcentageAtt, pourcentagePar, degAtt, nom, ptMana, pourcentageMag, pourcentageResistMag,dist, degMag);
         this.nbFleches = nbFleches;
     }
 

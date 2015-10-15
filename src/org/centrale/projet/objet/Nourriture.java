@@ -26,7 +26,7 @@ public abstract class Nourriture extends Objet implements Utilisable {
         this.nbTours = 0;
     }
 
-    public Nourriture(int nbPt, int nbTours, Point2D p, String et) {
+    public Nourriture(Point2D p, String et, int nbPt, int nbTours) {
         super(p, et);
         this.nbPt = nbPt;
         this.nbTours = nbTours;

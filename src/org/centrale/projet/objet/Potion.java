@@ -29,6 +29,16 @@ public abstract class Potion extends Objet implements Utilisable {
         super();
         nbPt=0;
     }
+
+    public void setNbPt(int nbPt) {
+        this.nbPt = nbPt;
+    }
+
+    public int getNbPt() {
+        return nbPt;
+    }
+    
+    
     
     @Override
     public void affiche(){

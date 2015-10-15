@@ -6,7 +6,6 @@
 package org.centrale.projet.objet;
 
 import java.lang.reflect.InvocationTargetException;
-import org.centrale.projet.objet.World;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,6 +24,13 @@ public class Joueur {
 
     public Joueur(Personnage perso) {
         this.perso = perso;
+    }
+    
+    /**
+     * Par défaut, un joueur possède le personnage le plus faible
+     */
+    public Joueur(){
+        this.perso = new Paysan();
     }
 
     public void setPerso(Personnage perso) {

@@ -21,8 +21,8 @@ public class Champignon extends Nourriture {
         this.etiquette="Champi "+nbPt;
     }
 
-    public Champignon(int nbPt, int nbTours, Point2D p, String et) {
-        super(nbPt, nbTours, p, et);
+    public Champignon(Point2D p, String et, int nbPt, int nbTours) {
+        super(p, et, nbPt, nbTours);
     }
 
     
