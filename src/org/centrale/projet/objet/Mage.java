@@ -37,14 +37,12 @@ public class Mage extends Personnage implements Combattant{
         super();
         Random rand = new Random();
         this.setPtVie(100);
-        this.setPtPar(rand.nextInt(15));
-        this.setPourcentageAtt(rand.nextInt(10));
-        this.setPourcentagePar(rand.nextInt(30));
-        this.setDegAtt(rand.nextInt(10));
+        this.setPtPar(rand.nextInt(20)+10);
+        this.setPourcentagePar(rand.nextInt(30)+30);
         this.setPtMana(10);
-        this.setPourcentageMag(rand.nextInt(70));
-        this.setDegMag(rand.nextInt(50));
-        this.setDistAttMax(rand.nextInt(15));
+        this.setPourcentageMag(rand.nextInt(40)+40);
+        this.setDegMag(rand.nextInt(30)+20);
+        this.setDistAttMax(rand.nextInt(20)+5);
     }
 
     public Mage(Mage m) {

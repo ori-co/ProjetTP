@@ -35,10 +35,10 @@ public class Loup extends Monstre implements Combattant {
         super();
         Random rand = new Random();
         this.setPtVie(100);
-        this.setPtPar(rand.nextInt(20));
-        this.setPourcentageAtt(rand.nextInt(70));
-        this.setPourcentagePar(rand.nextInt(30));
-        this.setDegAtt(rand.nextInt(50));
+        this.setPtPar(rand.nextInt(20)+10);
+        this.setPourcentageAtt(rand.nextInt(40)+40);
+        this.setPourcentagePar(rand.nextInt(30)+30);
+        this.setDegAtt(rand.nextInt(30)+30);
     }
     
     @Override

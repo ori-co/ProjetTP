@@ -21,7 +21,8 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
 
     public NuageToxique() {
         super();
-        charge = 0;
+        Random rand = new Random();
+        charge = rand.nextInt(30)+30;
     }
 
     public NuageToxique(int ch, Point2D p, String et) {

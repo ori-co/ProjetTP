@@ -33,7 +33,7 @@ public class Lapin extends Monstre {
         super();
         Random rand = new Random();
         this.setPtVie(100);
-        this.setPtPar(rand.nextInt(5));
-        this.setPourcentagePar(rand.nextInt(15));
+        this.setPtPar(rand.nextInt(20));
+        this.setPourcentagePar(rand.nextInt(30)+10);
     }
 }

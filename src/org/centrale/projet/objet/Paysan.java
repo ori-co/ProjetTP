@@ -41,8 +41,8 @@ public class Paysan extends Personnage{
         super();
         Random rand = new Random();
         this.setPtVie(100);
-        this.setPtPar(rand.nextInt(10));
-        this.setPourcentagePar(rand.nextInt(40));
+        this.setPtPar(rand.nextInt(20));
+        this.setPourcentagePar(rand.nextInt(30)+10);
     }
     
     

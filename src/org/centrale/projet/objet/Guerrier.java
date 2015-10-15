@@ -22,13 +22,10 @@ public class Guerrier extends Personnage implements Combattant {
         super();
         Random rand = new Random();
         this.setPtVie(100);
-        this.setPtPar(rand.nextInt(30));
-        this.setPourcentageAtt(rand.nextInt(70));
-        this.setPourcentagePar(rand.nextInt(40));
-        this.setDegAtt(rand.nextInt(60));
-        this.setPourcentageMag(rand.nextInt(10));
-        this.setDegMag(rand.nextInt(15));
-        this.setDistAttMax(rand.nextInt(3));
+        this.setPtPar(rand.nextInt(20)+10);
+        this.setPourcentageAtt(rand.nextInt(40)+40);
+        this.setPourcentagePar(rand.nextInt(30)+50);
+        this.setDegAtt(rand.nextInt(30)+30);
         
     }
 
