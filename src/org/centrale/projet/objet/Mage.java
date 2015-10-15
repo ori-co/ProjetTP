@@ -67,11 +67,8 @@ public class Mage extends Personnage implements Combattant{
             if (rand.nextInt(100) <= this.pourcentageMag) {
                 // attaque réussie
 
-                System.out.println(this.getPtMana());
-
                 if (this.ptMana > 0) {
                     this.ptMana--;
-                    System.out.println(this.getPtMana());
                     def.ptVie -= this.degMag;
                     System.out.println("L'adversaire est touché ! Il perd " + this.degMag + " points de vie.");
                 } else {

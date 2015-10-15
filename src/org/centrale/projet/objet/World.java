@@ -38,7 +38,7 @@ public class World {
 
     public World() {
         lesBots = new ArrayList<>();
-        tailleMonde = 20; //taille par defaut
+        tailleMonde = 50; //taille par defaut
         lesJoueurs = new ArrayList<>();
     }
 
@@ -153,6 +153,7 @@ public class World {
             lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Mana"));
             lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Biscuit"));
             lesTypesDElements.add(Class.forName("org.centrale.projet.objet.Champignon"));
+            lesTypesDElements.add(Class.forName("org.centrale.projet.objet.NuageToxique"));
 
             for (int i = 0; i < nbBots; i++) {
                 placesLibres = pl.listeDePlaces(this);
@@ -182,13 +183,13 @@ public class World {
      */
     public void creationJoueur() {
         System.out.println("Creation d'un joueur");
-        
+
         Scanner sc;
         System.out.println("Nom du personnage : ");
         sc = new Scanner(System.in);
         String nom = sc.nextLine();
 
-        Personnage p = null ;
+        Personnage p = null;
         Joueur j = new Joueur(p);
         ArrayList<Class> listeChoix = new ArrayList<>();
         try {
@@ -200,18 +201,18 @@ public class World {
             Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Class choix = (Class) j.choisi((ArrayList<Object>)(Object)listeChoix);
+        Class choix = (Class) j.choisi((ArrayList<Object>) (Object) listeChoix);
         try {
             p = (Personnage) choix.newInstance();
             p.setNom(nom);
         } catch (InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(World.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.placer(p, new PlaceVide());
         j = new Joueur(p);
         this.lesJoueurs.add(j);
-                
+
     }
 
     /**
@@ -272,14 +273,23 @@ public class World {
                 if (!liste.isEmpty()) {
                     System.out.print("Combat contre un adversaire aléatoirement choisi : ");
                     ((Combattant) element).combattre(liste.get(rand.nextInt(liste.size())));
+                } else {
+                    if (element instanceof Deplacable) {
+                        System.out.println("Déplacement aléatoire");
+                        this.placer(element, ((Deplacable) element).deplace(), new PlaceAccessible());
+                    } else {
+                        // on ne fait rien
+                        System.out.println("Aucune action possible");
+                    }
                 }
             } else {
                 if (element instanceof Deplacable) {
                     // si l'élement est Deplacable, on le déplace, sur une case adjacente aléatoirement choisie
-                    System.out.println("Déplacement aléatoire :");
+                    System.out.println("Déplacement aléatoire");
                     this.placer(element, ((Deplacable) element).deplace(), new PlaceAccessible());
                 } else {
                     // on ne fait rien
+                    System.out.println("Aucune action possible");
                 }
             }
 
@@ -289,6 +299,31 @@ public class World {
             }
         }
 //fin tourDeJeu()
+        this.mort();
+    }
+
+    /**
+     * Eliminie du jeu les personnages n'ayant plus de points de vie
+     */
+    public void mort() {
+
+        for (int i = 0; i < lesJoueurs.size(); i++) {
+            if (lesJoueurs.get(i).getPerso().getPtVie() <= 0) {
+                System.out.println("La partie est terminiée pour " + lesJoueurs.get(i).getPerso().getNom() + " :(");
+                lesJoueurs.remove(lesJoueurs.get(i));
+                i--;
+            }
+        }
+        for (int i = 0; i < lesBots.size(); i++) {
+            if (lesBots.get(i) instanceof Creature) {
+                if (((Creature) lesBots.get(i)).getPtVie() <= 0) {
+                    System.out.println("La partie est terminiée pour ");
+                    lesBots.get(i).affiche();
+                    lesBots.remove(lesBots.get(i));
+                    i--;
+                }
+            }
+        }
     }
 
     public void lectureListePersonnages() {

@@ -59,14 +59,13 @@ public class MainClass {
         
         // Test tour de jeu
         World monde = new World();
-        monde.creeMondeAlea(15);
+        monde.creeMondeAlea(30);
         monde.afficheWorld();
         monde.creationJoueur();
-        for (int i =0;i<50;i++){
+        while (!monde.lesJoueurs.isEmpty()){
             monde.afficheMatrice();
-            monde.tourDeJeu();
-                      
+            monde.tourDeJeu();            
         }
-        
+        monde.afficheWorld();
     }
 }

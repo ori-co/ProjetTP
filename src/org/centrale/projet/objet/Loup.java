@@ -75,16 +75,18 @@ public class Loup extends Monstre implements Combattant {
             System.out.println("L'adversaire est trop loin pour être attaqué !");
         }
     }
-    
+  
     @Override
     public ArrayList<Creature> listeAdversaire(World monde) {
         ArrayList<Creature> liste = new ArrayList<>();
-        
-        for (ElementPhysique element : monde.lesBots){
-            if (element instanceof Creature){
+
+        for (ElementPhysique element : monde.lesBots) {
+            if (element instanceof Creature) {
                 float dist = element.getPos().distance(this.getPos());
-                if (dist <2){
-                    liste.add((Creature) element);
+                if (dist < 2) {
+                    if (!element.equals(this)) {
+                        liste.add((Creature) element);
+                    }
                 }
             }
         }

@@ -92,7 +92,9 @@ public class Guerrier extends Personnage implements Combattant {
             if (element instanceof Creature){
                 float dist = element.getPos().distance(this.getPos());
                 if (dist <2){
+                    if (!element.equals(this)) {
                     liste.add((Creature) element);
+                    }
                 }
             }
         }
