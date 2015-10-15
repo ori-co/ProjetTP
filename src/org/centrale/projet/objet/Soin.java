@@ -5,6 +5,8 @@
  */
 package org.centrale.projet.objet;
 
+import java.util.Random;
+
 /**
  *
  * @author oriane école
@@ -18,6 +20,9 @@ public class Soin extends Potion {
 
     public Soin() {
         super();
+        Random rand = new Random();
+        this.nbPt=(rand.nextInt(3)+1)*10;
+        this.etiquette="Potion de Santé "+nbPt;
     }
     
 

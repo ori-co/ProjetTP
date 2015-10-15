@@ -50,7 +50,7 @@ public abstract class Nourriture extends Objet implements Utilisable {
      
     @Override
     public void affiche(){
-        System.out.println(this.getClass().getSimpleName()+" : Position : " + pos);
+        System.out.println(this.getClass().getSimpleName()+" : "+this.etiquette+" Position : " + pos);
     }
     
     @Override
