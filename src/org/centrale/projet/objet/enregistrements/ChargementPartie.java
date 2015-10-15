@@ -50,6 +50,12 @@ public class ChargementPartie {
     }
 
     //Méthodes
+    /**
+     * Cette méthode lit un fichier de sauvegarde du jeu et retourne une instance de 
+     * World correspondant aux informations présentes dans le fichier
+     * 
+     * @return le monde tel qu'il a été sauvegardé
+     */
     public World chargerPartie() {
 
         World monde = new World();
@@ -69,26 +75,30 @@ public class ChargementPartie {
                 }
                 // on ajoute au monde l'élément de jeu défini par la ligne courante
                 if (mots.get(0).equals("Taille")) {
+                    // s'il s'agit d'une ligne liée à la taille du monde, on modifie la constante
                     World.tailleMonde = Integer.parseInt(mots.get(1));
                 } else {
                     if(mots.get(0).equals("Joueur")){
+                        // s'il s'agit d'une ligne liée à un joueur, on crée le personnage lié à ce joueur
                         mots.remove(mots.get(0));
                         ElementPhysique nv = this.creerElement(mots);
                         Joueur nvj = new Joueur((Personnage)nv);
                         monde.lesJoueurs.add(nvj);
                     } else {
+                        // sinon, il s'agit d'un élément physique 
                         ElementPhysique nv= this.creerElement(mots);
                         monde.lesBots.add(nv);
                     }
                 }
+                // on passe à la ligne suivante du fichier
                 ligne = fichier.readLine();
             }
+            fichier.close();
 
-            // modifier World
             // retourner le monde créé
             return monde;
         } catch (IOException ex) {
-            Logger.getLogger(ChargementPartie.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
             // ne retourne rien
             return null;
         }
@@ -97,7 +107,8 @@ public class ChargementPartie {
     }
     
     /** 
-     * Creation d'un elément de jeu définis dans le monde
+     * Creation d'un elément de jeu défini grace à une liste de mots (les paramètres des constructeurs)
+     * 
      * @param mots définition de l'élément de jeu à ajouter
      * @return l'élement du jeu créé
     *
